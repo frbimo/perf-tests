@@ -17,6 +17,7 @@ limitations under the License.
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"path"
@@ -356,6 +357,10 @@ func runSingleTest(
 		ComponentTexts: []string{suiteSummary.SuiteDescription, testID},
 	}
 	printTestStart(testID)
+
+	b, _ := json.MarshalIndent(clusterLoaderConfig, "", " ")
+	klog.Infof("%s", b)
+
 	if errList := test.RunTest(f, prometheusFramework, &clusterLoaderConfig); !errList.IsEmpty() {
 		suiteSummary.NumberOfFailedSpecs++
 		specSummary.State = ginkgotypes.SpecStateFailed
