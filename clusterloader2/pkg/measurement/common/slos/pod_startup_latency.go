@@ -34,7 +34,7 @@ import (
 )
 
 const (
-	defaultPodStartupLatencyThreshold = 5 * time.Second
+	defaultPodStartupLatencyThreshold = 30 * time.Second
 	podStartupLatencyMeasurementName  = "PodStartupLatency"
 	informerSyncTimeout               = time.Minute
 
