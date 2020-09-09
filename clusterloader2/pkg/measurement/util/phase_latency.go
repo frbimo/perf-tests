@@ -89,6 +89,7 @@ func (o *ObjectTransitionTimes) CalculateTransitionsLatency(t map[string]Transit
 	o.lock.Lock()
 	defer o.lock.Unlock()
 	metric := make(map[string]*LatencyMetric)
+
 	for name, transition := range t {
 		lag := make([]LatencyData, 0, len(o.times))
 		for key, transitionTimes := range o.times {
@@ -114,6 +115,7 @@ func (o *ObjectTransitionTimes) CalculateTransitionsLatency(t map[string]Transit
 		}
 
 		sort.Sort(LatencySlice(lag))
+		klog.V(0).Infoln(name)
 		o.printLatencies(lag, fmt.Sprintf("worst %s latencies", name), transition.Threshold)
 		lagMetric := NewLatencyMetric(lag)
 		metric[name] = &lagMetric

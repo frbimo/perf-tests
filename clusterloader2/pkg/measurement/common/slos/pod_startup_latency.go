@@ -34,7 +34,7 @@ import (
 )
 
 const (
-	defaultPodStartupLatencyThreshold = 5 * time.Second
+	defaultPodStartupLatencyThreshold = 60 * time.Second
 	podStartupLatencyMeasurementName  = "PodStartupLatency"
 	informerSyncTimeout               = time.Minute
 
@@ -129,7 +129,7 @@ func (p *podStartupLatencyMeasurement) stop() {
 }
 
 func (p *podStartupLatencyMeasurement) gather(c clientset.Interface, identifier string) ([]measurement.Summary, error) {
-	klog.V(2).Infof("%s: gathering pod startup latency measurement...", p)
+	klog.V(0).Infof("%s: gathering pod startup latency measurement...", p)
 	if !p.isRunning {
 		return nil, fmt.Errorf("metric %s has not been started", podStartupLatencyMeasurementName)
 	}
