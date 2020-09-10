@@ -41,7 +41,7 @@ spec:
   storage:
     volumeClaimTemplate:
       spec:
-        storageClassName: ssd
+        storageClassName: cinder-csi
         resources:
           requests:
             # Start with 10Gi, add 10Gi for each 1K nodes.

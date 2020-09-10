@@ -43,7 +43,7 @@ import (
 
 const (
 	namespace                    = "monitoring"
-	storageClass                 = "ssd"
+	storageClass                 = "cinder-csi"
 	checkPrometheusReadyInterval = 30 * time.Second
 	checkPrometheusReadyTimeout  = 15 * time.Minute
 	numK8sClients                = 1
