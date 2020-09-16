@@ -64,6 +64,7 @@ func CheckTargetsReady(k8sClient kubernetes.Interface, selector func(Target) boo
 		klog.Warningf("error while calling prometheus api: %v, response: %q", err, response)
 		return false, nil
 	}
+
 	var response targetsResponse
 	if err := json.Unmarshal(raw, &response); err != nil {
 		return false, err // This shouldn't happen, return error.
@@ -80,6 +81,7 @@ func CheckTargetsReady(k8sClient kubernetes.Interface, selector func(Target) boo
 			continue
 		}
 		exampleNotReadyTarget = t
+		klog.V(2).Infof("%v\n", t)
 	}
 	if nTotal < minActiveTargets {
 		klog.V(2).Infof("Not enough active targets (%d), expected at least (%d), waiting for more to become active...",
